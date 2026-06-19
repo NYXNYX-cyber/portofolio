@@ -31,14 +31,14 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 w-full max-w-[100vw] overflow-x-hidden ${
         scrolled ? 'bg-p5-black border-b-4 border-p5-red' : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="flex items-center justify-between h-16 md:h-20 w-full">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group bg-p5-white text-p5-black px-3 py-1 transform -skew-x-12 p5-border-alt">
+          <a href="#" className="flex items-center gap-2 group bg-p5-white text-p5-black px-3 py-1 transform -skew-x-12 p5-border-alt shrink-0 ml-2">
             <span className="text-xl font-bold font-mono uppercase italic tracking-tighter">
               Handika
             </span>
@@ -69,7 +69,7 @@ export default function Navbar() {
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-p5-white bg-p5-red border-2 border-p5-white transform -skew-x-12"
+            className="md:hidden p-2 text-p5-white bg-p5-red border-2 border-p5-white transform -skew-x-12 shrink-0 mr-2"
             aria-label="Toggle menu"
           >
             {isOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
@@ -84,9 +84,9 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-p5-black border-b-4 border-p5-red overflow-hidden"
+            className="md:hidden bg-p5-black border-b-4 border-p5-red overflow-hidden w-full"
           >
-            <div className="px-4 py-6 flex flex-col gap-4 items-center">
+            <div className="px-4 py-6 flex flex-col gap-4 items-center w-full">
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.name}
@@ -95,7 +95,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="w-full text-center py-3 text-xl font-black text-p5-white bg-p5-dark border-2 border-p5-gray transform -skew-x-12 active:bg-p5-red active:text-p5-white"
+                  className="w-full max-w-sm mx-auto text-center py-3 text-xl font-black text-p5-white bg-p5-dark border-2 border-p5-gray transform -skew-x-12 active:bg-p5-red active:text-p5-white block"
                 >
                   {link.name}
                 </motion.a>
@@ -104,7 +104,7 @@ export default function Navbar() {
                 href="/HandikaPratamaWicaksonoResume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full text-center py-3 mt-2 text-xl font-black text-p5-white bg-p5-red border-2 border-p5-white transform -skew-x-12"
+                className="w-full max-w-sm mx-auto text-center py-3 mt-2 text-xl font-black text-p5-white bg-p5-red border-2 border-p5-white transform -skew-x-12 block"
               >
                 RESUME
               </a>
