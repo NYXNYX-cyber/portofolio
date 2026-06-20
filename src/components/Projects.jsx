@@ -8,7 +8,8 @@ const projects = [
     tech: 'Unity 6 / C#',
     link: '#',
     hasLogo: true,
-    imageId: 'dove'
+    imageId: 'dove',
+    certImage: '/certificate-bandung.jpg'
   },
   {
     title: 'NyxPaaS / Nyx-DeployApps',
@@ -16,7 +17,8 @@ const projects = [
     tech: 'Cloud / DevOps',
     link: 'https://github.com/NYXNYX-cyber/Nyx-DeployApps',
     hasLogo: false,
-    imageId: 'nyxpaas'
+    imageId: 'nyxpaas',
+    certImage: '/sertifikat_course_653_5150258_200626222744_pages-to-jpg-0002.jpg'
   },
   {
     title: 'NyxIDE',
@@ -70,8 +72,10 @@ const projects = [
 
 // Komponen Card Gambar
 function ProjectImageCard({ proj }) {
-  const [imgSrc, setImgSrc] = useState(`/projects/${proj.imageId}.png`)
   const [hasError, setHasError] = useState(false)
+
+  // Jika ada certImage, gunakan itu. Jika tidak, gunakan /projects/{imageId}.png
+  const imgSrc = proj.certImage || `/projects/${proj.imageId}.png`
 
   return (
     <div className="relative aspect-video w-full bg-p5-dark border-4 border-p5-gray flex items-center justify-center overflow-hidden group">
@@ -85,14 +89,7 @@ function ProjectImageCard({ proj }) {
         <img 
           src={imgSrc} 
           alt={proj.title}
-          onError={() => {
-            // Coba fallback format .jpg jika .png gagal
-            if (imgSrc.endsWith('.png')) {
-              setImgSrc(`/projects/${proj.imageId}.jpg`)
-            } else {
-              setHasError(true)
-            }
-          }}
+          onError={() => setHasError(true)}
           className="w-full h-full object-cover filter grayscale contrast-125 hover:grayscale-0 transition-all duration-300"
         />
       )}
