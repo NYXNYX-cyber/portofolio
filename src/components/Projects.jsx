@@ -70,12 +70,47 @@ const projects = [
   }
 ]
 
-// Komponen Card Gambar
-function ProjectImageCard({ proj }) {
+// Komponen Card Gambar (Sertifikat Portrait - Fokus ke Bagian Atas)
+function CertificateCard({ proj }) {
   const [hasError, setHasError] = useState(false)
 
-  // Jika ada certImage, gunakan itu. Jika tidak, gunakan /projects/{imageId}.png
-  const imgSrc = proj.certImage || `/projects/${proj.imageId}.png`
+  return (
+    <div className="relative aspect-[3/4] w-full bg-p5-dark border-4 border-p5-gray flex items-center justify-center overflow-hidden group">
+      {/* Jika gambar tidak ada/error, tampilkan placeholder "SOON" */}
+      {hasError ? (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-p5-black text-p5-gray transform -skew-x-6">
+          <span className="font-mono text-xs opacity-50 mb-1">{proj.title}</span>
+          <span className="font-black text-3xl tracking-widest text-p5-red">SOON</span>
+        </div>
+      ) : (
+        <img 
+          src={proj.certImage} 
+          alt={`${proj.title} - Sertifikat`}
+          onError={() => setHasError(true)}
+          className="w-full h-full object-contain grayscale contrast-125 hover:grayscale-0 transition-all duration-300 p-2"
+        />
+      )}
+      
+      {/* Decorative frame overlay ala Persona */}
+      <div className="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-p5-red m-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-4 h-4 border-b-4 border-r-4 border-p5-red m-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+    </div>
+  )
+}
+
+// Komponen Card Gambar Proyek Biasa (Potrait/Landscape - SOON or Preview)
+function ProjectPreviewCard({ proj }) {
+  const [imgSrc, setImgSrc] = useState(`/projects/${proj.imageId}.png`)
+  const [hasError, setHasError] = useState(false)
+
+  // Coba fallback format .jpg jika .png gagal
+  const handleImageError = () => {
+    if (imgSrc.endsWith('.png')) {
+      setImgSrc(`/projects/${proj.imageId}.jpg`)
+    } else {
+      setHasError(true)
+    }
+  }
 
   return (
     <div className="relative aspect-video w-full bg-p5-dark border-4 border-p5-gray flex items-center justify-center overflow-hidden group">
@@ -89,7 +124,7 @@ function ProjectImageCard({ proj }) {
         <img 
           src={imgSrc} 
           alt={proj.title}
-          onError={() => setHasError(true)}
+          onError={handleImageError}
           className="w-full h-full object-cover filter grayscale contrast-125 hover:grayscale-0 transition-all duration-300"
         />
       )}
@@ -177,7 +212,11 @@ export default function Projects() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {projects.map((proj, idx) => (
-              <ProjectImageCard key={`img-${idx}`} proj={proj} />
+              proj.certImage ? (
+                <CertificateCard key={`cert-${idx}`} proj={proj} />
+              ) : (
+                <ProjectPreviewCard key={`preview-${idx}`} proj={proj} />
+              )
             ))}
           </div>
         </motion.div>
