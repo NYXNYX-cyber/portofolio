@@ -45,22 +45,6 @@ const projects = [
     imageId: 'digiclass'
   },
   {
-    title: 'Image Analyzer',
-    desc: 'MCP (Model Context Protocol) Server untuk analisis gambar menggunakan vision AI model.',
-    tech: 'Python / MCP',
-    link: 'https://github.com/NYXNYX-cyber/MCP-Image_Analyzer',
-    hasLogo: false,
-    imageId: 'image-analyzer'
-  },
-  {
-    title: 'NYXBOT32',
-    desc: 'Proyek automasi bot serbaguna berbasis JavaScript dengan kemampuan integrasi sistem.',
-    tech: 'JavaScript / Node.js',
-    link: 'https://github.com/NYXNYX-cyber/NYXBOT32',
-    hasLogo: false,
-    imageId: 'nyxbot32'
-  },
-  {
     title: 'Home Lab',
     desc: 'Infrastruktur VPS komersial menggunakan Proxmox VE dengan isolasi VPN dan firewall ketat.',
     tech: 'Proxmox / Linux',
