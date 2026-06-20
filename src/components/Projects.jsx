@@ -18,7 +18,7 @@ const projects = [
     link: 'https://github.com/NYXNYX-cyber/Nyx-DeployApps',
     hasLogo: false,
     imageId: 'nyxpaas',
-    certImage: '/sertifikat_course_653_5150258_200626222744_pages-to-jpg-0002.jpg'
+    certImage: '/sertifikat_course_653_5150258_200626222744_pages-to-jpg-0001.jpg'
   },
   {
     title: 'NyxIDE',
