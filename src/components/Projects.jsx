@@ -18,7 +18,8 @@ const projects = [
     link: 'https://github.com/NYXNYX-cyber/Nyx-DeployApps',
     hasLogo: false,
     imageId: 'nyxpaas',
-    certImage: '/sertifikat_course_653_5150258_200626222744_pages-to-jpg-0001.jpg'
+    certImage: '/sertifikat_course_653_5150258_200626222744_pages-to-jpg-0001.jpg',
+    certLandscape: true
   },
   {
     title: 'Foundation C# With Microsoft',
@@ -27,7 +28,8 @@ const projects = [
     link: '#',
     hasLogo: false,
     imageId: 'foundation-csharp',
-    certImage: '/foundation-csharp.jpg'
+    certImage: '/foundation-csharp.jpg',
+    certLandscape: true
   },
   {
     title: 'NyxIDE',
@@ -60,7 +62,7 @@ function CertificateCard({ proj }) {
   const [hasError, setHasError] = useState(false)
 
   return (
-    <div className="relative aspect-[3/4] w-full bg-p5-dark border-4 border-p5-gray flex items-center justify-center overflow-hidden group">
+    <div className={`relative w-full bg-p5-dark border-4 border-p5-gray flex items-center justify-center overflow-hidden group ${proj.certLandscape ? 'aspect-video' : 'aspect-[3/4]'}`}>
       {/* Jika gambar tidak ada/error, tampilkan placeholder "SOON" */}
       {hasError ? (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-p5-black text-p5-gray transform -skew-x-6">
