@@ -21,6 +21,15 @@ const projects = [
     certImage: '/sertifikat_course_653_5150258_200626222744_pages-to-jpg-0001.jpg'
   },
   {
+    title: 'Foundation C# With Microsoft',
+    desc: 'Sertifikat Foundation C# dengan Microsoft — penguasaan fundamental C# dan .NET framework.',
+    tech: 'C# / .NET',
+    link: '#',
+    hasLogo: false,
+    imageId: 'foundation-csharp',
+    certImage: '/foundation-csharp.jpg'
+  },
+  {
     title: 'NyxIDE',
     desc: 'AI-Powered Desktop IDE terintegrasi agen kustom. Dibangun dengan Electron dan Monaco Editor.',
     tech: 'TypeScript / Electron',
@@ -43,15 +52,6 @@ const projects = [
     link: 'https://github.com/NYXNYX-cyber/digiclass-remake',
     hasLogo: false,
     imageId: 'digiclass'
-  },
-  {
-    title: 'Foundation C# With Microsoft',
-    desc: 'Sertifikat Foundation C# dengan Microsoft — penguasaan fundamental C# dan .NET framework.',
-    tech: 'C# / .NET',
-    link: '#',
-    hasLogo: false,
-    imageId: 'foundation-csharp',
-    certImage: '/foundation-csharp.jpg'
   }
 ]
 
