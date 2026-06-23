@@ -45,12 +45,13 @@ const projects = [
     imageId: 'digiclass'
   },
   {
-    title: 'Home Lab',
-    desc: 'Infrastruktur VPS komersial menggunakan Proxmox VE dengan isolasi VPN dan firewall ketat.',
-    tech: 'Proxmox / Linux',
+    title: 'Foundation C# With Microsoft',
+    desc: 'Sertifikat Foundation C# dengan Microsoft — penguasaan fundamental C# dan .NET framework.',
+    tech: 'C# / .NET',
     link: '#',
     hasLogo: false,
-    imageId: 'homelab'
+    imageId: 'foundation-csharp',
+    certImage: '/foundation-csharp.jpg'
   }
 ]
 
