@@ -51,6 +51,12 @@ const galleryData = [
     certLandscape: true
   },
   {
+    title: 'Python (Kaggle)',
+    imageId: 'python-kaggle',
+    certImage: '/python-kaggle.png',
+    certLandscape: true
+  },
+  {
     title: 'NyxIDE',
     imageId: 'nyxide'
   },
