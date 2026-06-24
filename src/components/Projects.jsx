@@ -28,6 +28,30 @@ const projects = [
     link: '#',
     hasLogo: false,
     imageId: 'homelab'
+  },
+  {
+    title: 'NyxIDE',
+    desc: 'AI-Powered Desktop IDE terintegrasi agen kustom. Dibangun dengan Electron dan Monaco Editor.',
+    tech: 'TypeScript / Electron',
+    link: 'https://github.com/NYXNYX-cyber/NyxIDE-Agent',
+    hasLogo: false,
+    imageId: 'nyxide'
+  },
+  {
+    title: 'Prosopon',
+    desc: 'Game RPG Dungeon Crawler singkat dan interaktif yang dibangun dan dijalankan murni di atas web/browser.',
+    tech: 'JavaScript / Web',
+    link: 'https://github.com/NYXNYX-cyber/Prosopon-Gemini',
+    hasLogo: false,
+    imageId: 'prosopon'
+  },
+  {
+    title: 'DigiClass',
+    desc: 'Platform edukasi modern (Next.js & NestJS) untuk mengelola tugas, kuis, dan mata pelajaran.',
+    tech: 'Next.js / NestJS',
+    link: 'https://github.com/NYXNYX-cyber/digiclass-remake',
+    hasLogo: false,
+    imageId: 'digiclass'
   }
 ]
 
