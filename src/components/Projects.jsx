@@ -234,13 +234,15 @@ export default function Projects() {
             <div className="flex-1 h-1 bg-p5-gray opacity-20"></div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="flex flex-wrap justify-center -m-2 sm:-m-3">
             {galleryData.map((proj, idx) => (
-              proj.certImage ? (
-                <CertificateCard key={`cert-${idx}`} proj={proj} />
-              ) : (
-                <ProjectPreviewCard key={`preview-${idx}`} proj={proj} />
-              )
+              <div key={proj.certImage ? `cert-${idx}` : `preview-${idx}`} className="w-1/2 sm:w-1/3 lg:w-1/4 p-2 sm:p-3">
+                {proj.certImage ? (
+                  <CertificateCard proj={proj} />
+                ) : (
+                  <ProjectPreviewCard proj={proj} />
+                )}
+              </div>
             ))}
           </div>
         </motion.div>
