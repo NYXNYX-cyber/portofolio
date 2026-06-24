@@ -22,37 +22,44 @@ const projects = [
     certLandscape: true
   },
   {
-    title: 'Foundation C# With Microsoft',
-    desc: 'Sertifikat Foundation C# dengan Microsoft — penguasaan fundamental C# dan .NET framework.',
-    tech: 'C# / .NET',
+    title: 'Home Lab',
+    desc: 'Infrastruktur VPS komersial menggunakan Proxmox VE dengan isolasi VPN dan firewall ketat.',
+    tech: 'Proxmox / Linux',
     link: '#',
     hasLogo: false,
+    imageId: 'homelab'
+  }
+]
+
+// Data khusus untuk galeri (ganti slot Home Lab dengan Foundation C#)
+const galleryData = [
+  {
+    title: "Dov'E",
+    imageId: 'dove',
+    certImage: '/certificate-bandung.jpg'
+  },
+  {
+    title: 'NyxPaaS / Nyx-DeployApps',
+    imageId: 'nyxpaas',
+    certImage: '/sertifikat_course_653_5150258_200626222744_pages-to-jpg-0001.jpg',
+    certLandscape: true
+  },
+  {
+    title: 'Foundation C# With Microsoft',
     imageId: 'foundation-csharp',
     certImage: '/foundation-csharp.jpg',
     certLandscape: true
   },
   {
     title: 'NyxIDE',
-    desc: 'AI-Powered Desktop IDE terintegrasi agen kustom. Dibangun dengan Electron dan Monaco Editor.',
-    tech: 'TypeScript / Electron',
-    link: 'https://github.com/NYXNYX-cyber/NyxIDE-Agent',
-    hasLogo: false,
     imageId: 'nyxide'
   },
   {
     title: 'Prosopon',
-    desc: 'Game RPG Dungeon Crawler singkat dan interaktif yang dibangun dan dijalankan murni di atas web/browser.',
-    tech: 'JavaScript / Web',
-    link: 'https://github.com/NYXNYX-cyber/Prosopon-Gemini',
-    hasLogo: false,
     imageId: 'prosopon'
   },
   {
     title: 'DigiClass',
-    desc: 'Platform edukasi modern (Next.js & NestJS) untuk mengelola tugas, kuis, dan mata pelajaran.',
-    tech: 'Next.js / NestJS',
-    link: 'https://github.com/NYXNYX-cyber/digiclass-remake',
-    hasLogo: false,
     imageId: 'digiclass'
   }
 ]
@@ -198,7 +205,7 @@ export default function Projects() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {projects.map((proj, idx) => (
+            {galleryData.map((proj, idx) => (
               proj.certImage ? (
                 <CertificateCard key={`cert-${idx}`} proj={proj} />
               ) : (
