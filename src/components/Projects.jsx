@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 const projects = [
   {
@@ -95,12 +95,11 @@ const galleryData = [
 ]
 
 // Komponen Card Gambar (Sertifikat Portrait - Fokus ke Bagian Atas)
-function CertificateCard({ proj }) {
+function CertificateCard({ proj, onImageClick }) {
   const [hasError, setHasError] = useState(false)
 
   return (
     <div className={`relative w-full bg-p5-dark border-4 border-p5-gray flex items-center justify-center overflow-hidden group ${proj.certLandscape ? 'aspect-video' : 'aspect-[3/4]'}`}>
-      {/* Jika gambar tidak ada/error, tampilkan placeholder "SOON" */}
       {hasError ? (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-p5-black text-p5-gray transform -skew-x-6">
           <span className="font-mono text-xs opacity-50 mb-1">{proj.title}</span>
@@ -111,11 +110,11 @@ function CertificateCard({ proj }) {
           src={proj.certImage} 
           alt={`${proj.title} - Sertifikat`}
           onError={() => setHasError(true)}
-          className="w-full h-full object-contain grayscale contrast-125 hover:grayscale-0 transition-all duration-300 p-2"
+          onClick={() => onImageClick?.(proj.certImage)}
+          className="w-full h-full object-contain grayscale contrast-125 hover:grayscale-0 transition-all duration-300 p-2 cursor-pointer"
         />
       )}
       
-      {/* Decorative frame overlay ala Persona */}
       <div className="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-p5-red m-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-4 h-4 border-b-4 border-r-4 border-p5-red m-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
     </div>
@@ -123,11 +122,10 @@ function CertificateCard({ proj }) {
 }
 
 // Komponen Card Gambar Proyek Biasa (Potrait/Landscape - SOON or Preview)
-function ProjectPreviewCard({ proj }) {
+function ProjectPreviewCard({ proj, onImageClick }) {
   const [imgSrc, setImgSrc] = useState(`/projects/${proj.imageId}.png`)
   const [hasError, setHasError] = useState(false)
 
-  // Coba fallback format .jpg jika .png gagal
   const handleImageError = () => {
     if (imgSrc.endsWith('.png')) {
       setImgSrc(`/projects/${proj.imageId}.jpg`)
@@ -138,7 +136,6 @@ function ProjectPreviewCard({ proj }) {
 
   return (
     <div className="relative aspect-video w-full bg-p5-dark border-4 border-p5-gray flex items-center justify-center overflow-hidden group">
-      {/* Jika gambar tidak ada/error, tampilkan placeholder "SOON" */}
       {hasError ? (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-p5-black text-p5-gray transform -skew-x-6">
           <span className="font-mono text-xs opacity-50 mb-1">{proj.title}</span>
@@ -149,13 +146,36 @@ function ProjectPreviewCard({ proj }) {
           src={imgSrc} 
           alt={proj.title}
           onError={handleImageError}
-          className="w-full h-full object-cover filter grayscale contrast-125 hover:grayscale-0 transition-all duration-300"
+          onClick={() => onImageClick?.(imgSrc)}
+          className="w-full h-full object-cover filter grayscale contrast-125 hover:grayscale-0 transition-all duration-300 cursor-pointer"
         />
       )}
       
-      {/* Decorative frame overlay ala Persona */}
       <div className="absolute top-0 left-0 w-4 h-4 border-t-4 border-l-4 border-p5-red m-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-4 h-4 border-b-4 border-r-4 border-p5-red m-2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+    </div>
+  )
+}
+
+// Lightbox overlay untuk melihat gambar ukuran besar
+function Lightbox({ src, onClose }) {
+  useEffect(() => {
+    const handleKey = (e) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [onClose])
+
+  return (
+    <div 
+      className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center cursor-pointer"
+      onClick={onClose}
+    >
+      <img 
+        src={src} 
+        alt="Preview" 
+        className="max-w-[90vw] max-h-[90vh] object-contain"
+        onClick={(e) => e.stopPropagation()}
+      />
     </div>
   )
 }
@@ -163,6 +183,7 @@ function ProjectPreviewCard({ proj }) {
 export default function Projects() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [lightboxSrc, setLightboxSrc] = useState(null)
 
   return (
     <section id="projects" className="section-padding bg-p5-black relative border-t-8 border-p5-red">
@@ -238,15 +259,19 @@ export default function Projects() {
             {galleryData.map((proj, idx) => (
               <div key={proj.certImage ? `cert-${idx}` : `preview-${idx}`} className="w-1/2 sm:w-1/3 lg:w-1/4 p-2 sm:p-3">
                 {proj.certImage ? (
-                  <CertificateCard proj={proj} />
+                  <CertificateCard proj={proj} onImageClick={setLightboxSrc} />
                 ) : (
-                  <ProjectPreviewCard proj={proj} />
+                  <ProjectPreviewCard proj={proj} onImageClick={setLightboxSrc} />
                 )}
               </div>
             ))}
           </div>
         </motion.div>
       </div>
+
+      {lightboxSrc && (
+        <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />
+      )}
     </section>
   )
 }
